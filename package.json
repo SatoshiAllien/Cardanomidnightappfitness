@@ -1,0 +1,19 @@
+{
+  "name": "cardano-midnight-app-fitness",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w @cardano-midnight-fitness/api",
+    "dev:web": "npm run dev -w @cardano-midnight-fitness/web",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "build": "npm run build -w @cardano-midnight-fitness/api && npm run build -w @cardano-midnight-fitness/web",
+    "db:migrate": "npm run db:migrate -w @cardano-midnight-fitness/api",
+    "db:generate": "npm run db:generate -w @cardano-midnight-fitness/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
