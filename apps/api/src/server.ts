@@ -1,22 +1,18 @@
-import cors from "@fastify/cors";
-import jwt from "@fastify/jwt";
-import Fastify from "fastify";
-import { env } from "./config/env.js";
-import { registerRoutes } from "./routes/index.js";
+import "dotenv/config";
+import cors from "cors";
+import express from "express";
+import { healthRouter } from "./routes/health.js";
+import { workoutsRouter } from "./routes/workouts.js";
 
-export async function buildServer() {
-  const app = Fastify({ logger: true });
+const app = express();
+const port = Number(process.env.PORT ?? 3001);
 
-  await app.register(cors, {
-    origin: env.corsOrigin,
-    credentials: true,
-  });
+app.use(cors());
+app.use(express.json());
 
-  await app.register(jwt, {
-    secret: env.jwtSecret,
-  });
+app.use("/health", healthRouter);
+app.use("/workouts", workoutsRouter);
 
-  await registerRoutes(app);
-
-  return app;
-}
+app.listen(port, () => {
+  console.log(`API running on http://localhost:${port}`);
+});

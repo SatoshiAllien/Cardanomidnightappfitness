@@ -1,37 +1,87 @@
-# Cardano Midnight App Fitness
+# Cardanomidnightappfitness
 
-Proof-of-Workout badge system on **Cardano** with **Midnight** privacy layer support.
+Monorepo for **Cardano Midnight App Fitness** — Proof-of-Workout on Cardano.
 
-Track workouts, hit thresholds, mint on-chain NFT badges — private fitness proofs on Cardano.
+| App | Stack | Port |
+|-----|-------|------|
+| API | Express + TypeScript | 3001 |
+| Web | Next.js 14 + Tailwind | 3000 |
+| iOS | SwiftUI + MVVM | Xcode |
 
-## Stack
+**Repository:** https://github.com/SatoshiAllien/Cardanomidnightappfitness
 
-- **Web / PWA** — Next.js 15, TypeScript, Tailwind CSS
-- **API** — Fastify, Prisma, PostgreSQL
-- **Blockchain** — Cardano (Lucid + Blockfrost) · Midnight-ready architecture
+---
 
-## Structure
-
-```
-apps/
-├── api/    # Backend API + Cardano minting
-└── web/    # Next.js web app + PWA workout screen
-```
-
-## Quick start (Mac / Linux)
+## 1. Clone
 
 ```bash
 git clone https://github.com/SatoshiAllien/Cardanomidnightappfitness.git
 cd Cardanomidnightappfitness
+```
+
+## 2. Setup env
+
+```bash
 cp apps/api/.env.example apps/api/.env
 cp apps/web/.env.example apps/web/.env.local
+```
+
+## 3. Install
+
+```bash
 npm install
-npm run db:migrate -w @cardano-midnight-fitness/api
+npm run install:all
+```
+
+(`npm install` at root installs `concurrently` and then API + Web deps.)
+
+## 4. Run (API + Web together)
+
+```bash
 npm run dev
 ```
 
-- API: http://localhost:4000
 - Web: http://localhost:3000
+- API: http://localhost:3001
+- Health check: http://localhost:3001/health
+
+## 5. Open iOS app in Xcode
+
+```bash
+open apps/ios/RunBadgeApp/RunBadgeApp.xcodeproj
+```
+
+1. Set **Team** in Signing & Capabilities
+2. Select iPhone or Simulator
+3. Press **Run** (⌘R)
+
+See [apps/ios/RunBadgeApp/README_IOS.md](apps/ios/RunBadgeApp/README_IOS.md).
+
+---
+
+## Project structure
+
+```
+Cardanomidnightappfitness/
+├── apps/
+│   ├── api/          Express API
+│   ├── web/          Next.js web app
+│   └── ios/
+│       └── RunBadgeApp/
+│           ├── RunBadgeApp.xcodeproj
+│           ├── Sources/
+│           └── Assets/
+├── package.json
+└── README.md
+```
+
+## API endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/health` | `{ status: "ok" }` |
+| GET | `/workouts` | Mock workout list |
+| POST | `/workouts` | Save workout, returns badge if threshold met |
 
 ## License
 

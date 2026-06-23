@@ -1,17 +1,12 @@
 {
-  "name": "cardano-midnight-app-fitness",
+  "name": "cardanomidnightappfitness",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "dev:api": "npm run dev -w @cardano-midnight-fitness/api",
-    "dev:web": "npm run dev -w @cardano-midnight-fitness/web",
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
-    "build": "npm run build -w @cardano-midnight-fitness/api && npm run build -w @cardano-midnight-fitness/web",
-    "db:migrate": "npm run db:migrate -w @cardano-midnight-fitness/api",
-    "db:generate": "npm run db:generate -w @cardano-midnight-fitness/api"
+    "install:all": "cd apps/api && npm install && cd ../web && npm install",
+    "dev": "concurrently \"cd apps/api && npm run dev\" \"cd apps/web && npm run dev\"",
+    "build": "npm --prefix apps/api run build && npm --prefix apps/web run build",
+    "start": "concurrently \"npm --prefix apps/api run start\" \"npm --prefix apps/web run start\"",
+    "postinstall": "npm run install:all"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
