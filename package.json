@@ -2,8 +2,9 @@
   "name": "cardanomidnightappfitness",
   "private": true,
   "scripts": {
-    "install:all": "cd apps/api && npm install && cd ../web && npm install",
-    "dev": "concurrently \"cd apps/api && npm run dev\" \"cd apps/web && npm run dev\"",
+    "install:all": "npm install --prefix apps/api && npm install --prefix apps/web",
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev --prefix apps/api\" \"npm run dev --prefix apps/web\"",
+    "setup": "bash setup.sh",
     "build": "npm --prefix apps/api run build && npm --prefix apps/web run build",
     "start": "concurrently \"npm --prefix apps/api run start\" \"npm --prefix apps/web run start\"",
     "postinstall": "npm run install:all"

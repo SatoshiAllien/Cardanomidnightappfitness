@@ -1,0 +1,42 @@
+╔══════════════════════════════════════════════════════════════╗
+║  FILE NOT FOUND? — USA QUESTI COMANDI ESATTI                 ║
+╚══════════════════════════════════════════════════════════════╝
+
+PASSO 1 — SCARICA (copia tutto nel Terminale Mac):
+
+git clone https://github.com/SatoshiAllien/Cardanomidnightappfitness.git
+cd Cardanomidnightappfitness
+
+PASSO 2 — VERIFICA CHE I FILE CI SIANO:
+
+ls apps/ios/RunBadgeApp/RunBadgeApp.xcodeproj
+ls apps/api/.env.example
+ls apps/web/.env.example
+
+Se dice "No such file" → sei nella cartella sbagliata.
+Devi essere DENTRO Cardanomidnightappfitness/
+
+PASSO 3A — WEB + API:
+
+chmod +x setup.sh
+./setup.sh
+npm run dev
+
+PASSO 3B — iOS XCODE (solo Mac):
+
+open apps/ios/RunBadgeApp/RunBadgeApp.xcodeproj
+
+Oppure doppio clic su: OPEN_XCODE.command
+
+──────────────────────────────────────────────────────────────
+
+PERCORSI CORRETTI (non usare "ios/" da solo):
+
+  ✓ apps/ios/RunBadgeApp/RunBadgeApp.xcodeproj
+  ✗ ios/StevenFitnessClub.xcodeproj        (altro progetto!)
+  ✗ RunBadgeApp.xcodeproj                  (manca apps/ios/)
+
+──────────────────────────────────────────────────────────────
+
+LINK GITHUB:
+https://github.com/SatoshiAllien/Cardanomidnightappfitness
